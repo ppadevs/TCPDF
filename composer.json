@@ -1,14 +1,13 @@
 {
-	"name": "ngaspari/tcpdf",
-	"homepage": "https://github.com/ngaspari/TCPDF",
+	"name": "ppadevs/tcpdf",
+	"homepage": "https://github.com/ppadevs/TCPDF",
 	"type": "library",
 	"description": "Modified version of TCPDF that includes option for setting barcode's bar width",
 	"keywords": ["PDF", "tcpdf"],
 	"license": "BSD-2-Clause",
 	"authors": [
 	{
-		"name": "Nikola Gasparic",
-		"email": "ngaspari@gmail.com"
+		"name": "ppadevs"
 	}
 	],
 	"require": {
