@@ -12628,7 +12628,7 @@ class TCPDF {
 		$k = $this->k;
 		$this->javascript .= sprintf("f".$name."=this.addField('%s','%s',%u,[%F,%F,%F,%F]);", $name, $type, $this->PageNo()-1, $x*$k, ($this->h-$y)*$k+1, ($x+$w)*$k, ($this->h-$y-$h)*$k+1)."\n";
 		$this->javascript .= 'f'.$name.'.textSize='.$this->FontSizePt.";\n";
-		while (list($key, $val) = each($prop)) {
+		while (list($key, $val) = $this->legacy_each($prop)) {
 			if (strcmp(substr($key, -5), 'Color') == 0) {
 				$val = TCPDF_COLORS::_JScolor($val);
 			} else {
@@ -16599,7 +16599,8 @@ class TCPDF {
 					// get attributes
 					preg_match_all('/([^=\s]*)[\s]*=[\s]*"([^"]*)"/', $element, $attr_array, PREG_PATTERN_ORDER);
 					$dom[$key]['attribute'] = array(); // reset attribute array
-					while (list($id, $name) = each($attr_array[1])) {
+					// 
+					while (list($id, $name) = $this->legacy_each($attr_array[1])) {
 						$dom[$key]['attribute'][strtolower($name)] = $attr_array[2][$id];
 					}
 					if (!empty($css)) {
@@ -16612,7 +16613,7 @@ class TCPDF {
 						// get style attributes
 						preg_match_all('/([^;:\s]*):([^;]*)/', $dom[$key]['attribute']['style'], $style_array, PREG_PATTERN_ORDER);
 						$dom[$key]['style'] = array(); // reset style attribute array
-						while (list($id, $name) = each($style_array[1])) {
+						while (list($id, $name) = $this->legacy_each($style_array[1])) {
 							// in case of duplicate attribute the last replace the previous
 							$dom[$key]['style'][strtolower($name)] = trim($style_array[2][$id]);
 						}
@@ -24531,6 +24532,17 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	}
 
 	// --- END SVG METHODS -----------------------------------------------------
+	
+	
+	// Replace for legacy each() function
+	// https://openwebsolutions.in/blog/alternative-deprecated-php-each-function/
+	function legacy_each(&$data){
+	    if (empty($data)) return false;
+	    $key = key($data);	    
+	    $ret = ($key === null)? false: [$key, current($data), 'key' => $key, 'value' => current($data)];
+	    next($data);	    
+	    return $ret;
+	}
 
 } // END OF TCPDF CLASS
 
