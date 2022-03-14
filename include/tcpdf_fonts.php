@@ -1994,7 +1994,7 @@ class TCPDF_FONTS {
 	 * @author Nicola Asuni
 	 * @public static
 	 */
-	public static function UTF8StringToArray($str, $isunicode=true, &$currentfont) {
+	public static function UTF8StringToArray($str, $isunicode=true, &$currentfont=null) {
 		if ($isunicode) {
 			// requires PCRE unicode support turned on
 			$chars = TCPDF_STATIC::pregSplit('//','u', $str, -1, PREG_SPLIT_NO_EMPTY);
@@ -2032,7 +2032,7 @@ class TCPDF_FONTS {
 	 * @since 1.53.0.TC005 (2005-01-05)
 	 * @public static
 	 */
-	public static function UTF8ToUTF16BE($str, $setbom=false, $isunicode=true, &$currentfont) {
+	public static function UTF8ToUTF16BE($str, $setbom=false, $isunicode=true, &$currentfont=null) {
 		if (!$isunicode) {
 			return $str; // string is not in unicode
 		}
