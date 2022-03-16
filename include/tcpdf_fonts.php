@@ -2016,7 +2016,7 @@ class TCPDF_FONTS {
 	 * @since 3.2.000 (2008-06-23)
 	 * @public static
 	 */
-	public static function UTF8ToLatin1($str, $isunicode=true, &$currentfont) {
+	public static function UTF8ToLatin1($str, $isunicode=true, &$currentfont=null) {
 		$unicode = self::UTF8StringToArray($str, $isunicode, $currentfont); // array containing UTF-8 unicode values
 		return self::UTF8ArrToLatin1($unicode);
 	}
